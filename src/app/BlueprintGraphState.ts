@@ -58,11 +58,12 @@ export type Node = {
 
 let nodes: { [key: string]: Node } = {};
 let forms: { [key: string]: Form } = {};
-let data_sources: {
+let set_data_sources: {
   [node_id: string]: {
     [property_name: string]: [string, string];
   };
 } = {}; //data_sources[node_id][property_name] = [target_node_id, target_property_name]
+
 
 export const GetNode = (id: string) => {
   return nodes[id];
@@ -82,34 +83,35 @@ export const SetDataSource = (
   target_node_id: string,
   target_property_name: string,
 ) => {
-  if (!data_sources[node_id]) data_sources[node_id] = {};
-  data_sources[node_id][property_name] = [target_node_id, target_property_name];
+  if (!set_data_sources[node_id]) set_data_sources[node_id] = {};
+  set_data_sources[node_id][property_name] = [target_node_id, target_property_name];
 
-  return data_sources;
+  return set_data_sources;
 };
 
 export const ClearDataSourceEntry = (
   node_id: string,
   property_name: string,
 ) => {
-  if (data_sources[node_id]?.[property_name]) {
-    delete data_sources[node_id][property_name];
+  if (set_data_sources[node_id]?.[property_name]) {
+    delete set_data_sources[node_id][property_name];
   }
 };
 
 export const GetDataSource = (node_id: string, property_name: string) => {
-  return data_sources[node_id]?.[property_name];
+  return set_data_sources[node_id]?.[property_name];
 };
 
 export const GetDataSources = () => {
-  return data_sources;
+  return set_data_sources;
 };
 
+  
+//this combs through the data from the server and constructs the 'global' data source items
 export const SetBlueprintData = (data: any) => {
   const forms_list = data?.forms ?? [];
   const nodes_list = data?.nodes ?? [];
 
-  //these should be sourced from elsewhere later
   const globalNode: Node = {
     id: "GLOBAL",
     type: "Form",
