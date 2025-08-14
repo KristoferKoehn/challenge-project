@@ -19,8 +19,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import DataSourceSelector from "./components/DataSourceSelector";
 
@@ -65,11 +63,16 @@ export default function Home() {
           </DialogTitle>
           <DialogDescription>Select data element to map</DialogDescription>
         </DialogHeader>
-        <DataSourceSelector node_id={selected_node}></DataSourceSelector>
-        <DialogFooter className="sm:justify-start">
+        <DataSourceSelector
+          selected_node_id={selected_node}
+          selected_property_name={selected_property}
+        ></DataSourceSelector>{" "}
+        {/* pass in selected node 
+        to DataSourceSelector */}
+        <DialogFooter className="sm:justify-end">
           <DialogClose asChild>
             <Button type="button" variant="outline">
-              Accept
+              Close
             </Button>
           </DialogClose>
         </DialogFooter>

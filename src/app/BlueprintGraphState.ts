@@ -36,7 +36,6 @@ export type Form = {
   updated_at: string;
 };
 
-//we're just going to pull in the bare minimum for this stuff
 type NodePosition = {
   x: number;
   y: number;
@@ -59,7 +58,11 @@ export type Node = {
 
 let nodes: { [key: string]: Node } = {};
 let forms: { [key: string]: Form } = {};
-let data_source: { [key: string]: string } = {};
+let data_sources: {
+  [node_id: string]: {
+    [property_name: string]: [string, string];
+  };
+} = {}; //data_sources[node_id][property_name] = [target_node_id, target_property_name]
 
 export const GetNode = (id: string) => {
   return nodes[id];
@@ -73,18 +76,44 @@ export const GetForm = (id: string) => {
   return forms[id];
 };
 
+export const SetDataSource = (
+  node_id: string,
+  property_name: string,
+  target_node_id: string,
+  target_property_name: string,
+) => {
+  if (!data_sources[node_id]) data_sources[node_id] = {};
+  data_sources[node_id][property_name] = [target_node_id, target_property_name];
+
+  return data_sources
+};
+
+export const ClearDataSourceEntry = (
+  node_id: string,
+  property_name: string,
+) => {
+  if (data_sources[node_id]?.[property_name]) {
+    delete data_sources[node_id][property_name];
+  }
+};
+
+export const GetDataSource = (node_id: string, property_name: string) => {
+  return data_sources[node_id]?.[property_name];
+};
+
+export const GetDataSources = () => {
+  return data_sources
+}
+
 export const SetBlueprintData = (data: any) => {
   const forms_list = data?.forms ?? [];
   const nodes_list = data?.nodes ?? [];
 
   forms_list.forEach((form: Form) => {
     forms[form.id] = form;
-    console.log(form.id)
   });
 
   nodes_list.forEach((node: Node) => {
     nodes[node.id] = node;
   });
 };
-
-export const GetAssociatedNodes = (id: string) => {};
