@@ -6,7 +6,7 @@ import {
   SetBlueprintData,
 } from "./BlueprintGraphState";
 import { useEffect, useState } from "react";
-import Node_Component from "./components/Node";
+import Node_Component from "../components/Node";
 import { Node } from "@/app/BlueprintGraphState";
 import { Accordion } from "@radix-ui/react-accordion";
 import { AccordionItem } from "@/components/ui/accordion";
@@ -20,7 +20,15 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import DataSourceSelector from "./components/DataSourceSelector";
+import DataSourceSelector from "../components/DataSourceSelector";
+
+//tests:
+//what if we get nothing back? what if what we get back is bad?
+//what if a node is pointing to a data source that doesn't exist?
+//if we get an empty graph, a graph with no edges, a graph with edges to everything
+//
+
+
 
 export default function Home() {
   const [data, setData] = useState<any>(null);
@@ -41,8 +49,6 @@ export default function Home() {
   if (!data) return <div>Loading..?</div>;
   SetBlueprintData(data);
   const node_array = GetNodes();
-  //call blueprint graph state => pass the data in
-  //then it parses the json and we're all good!! ship it!!
 
   return (
     <Dialog>

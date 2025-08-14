@@ -6,9 +6,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { GetNode, GetForm, SetDataSource } from "../BlueprintGraphState";
+import { GetNode, GetForm, SetDataSource } from "../app/BlueprintGraphState";
 import { Button } from "@/components/ui/button";
 
+//builds the thing that shows the data source selection buttons
 export default function DataSourceSelector(props: {
   selected_node_id: string;
   selected_property_name: string;
@@ -30,9 +31,6 @@ export default function DataSourceSelector(props: {
       target_property_name,
     );
   };
-
-  //gotta blast through the rest of this. we're almost there, just gotta make the stuff react correctly,
-  // and change the buttons to reflect the new data source (if it exists), like email: Form A.email
 
   return (
     <Accordion type="single" collapsible>
@@ -60,6 +58,7 @@ export default function DataSourceSelector(props: {
   );
 }
 
+//recursively traverses the DAG to get all applicable data sources
 function get_data_sources(selected_node_id: string): {
   [key: string]: string[];
 } {
