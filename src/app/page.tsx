@@ -6,7 +6,7 @@ import {
   SetBlueprintData,
 } from "./BlueprintGraphState";
 import { useEffect, useState } from "react";
-import Node_Component from "./components/Node";
+import Node_Component from "../components/Node";
 import { Node } from "@/app/BlueprintGraphState";
 import { Accordion } from "@radix-ui/react-accordion";
 import { AccordionItem } from "@/components/ui/accordion";
@@ -20,7 +20,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import DataSourceSelector from "./components/DataSourceSelector";
+import DataSourceSelector from "../components/DataSourceSelector";
 
 export default function Home() {
   const [data, setData] = useState<any>(null);

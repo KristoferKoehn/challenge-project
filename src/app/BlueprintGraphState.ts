@@ -109,7 +109,7 @@ export const SetBlueprintData = (data: any) => {
   const forms_list = data?.forms ?? [];
   const nodes_list = data?.nodes ?? [];
 
-  //these should be sourced from elsewhere
+  //these should be sourced from elsewhere later
   const globalNode: Node = {
     id: "GLOBAL",
     type: "Form",

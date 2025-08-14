@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { GetNode, GetForm, SetDataSource } from "../BlueprintGraphState";
+import { GetNode, GetForm, SetDataSource } from "../app/BlueprintGraphState";
 import { Button } from "@/components/ui/button";
 
 export default function DataSourceSelector(props: {
