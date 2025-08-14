@@ -20,6 +20,8 @@ import { Button } from "@/components/ui/button";
 
 import { Dispatch, SetStateAction} from "react";
 
+//this is the component that displays the current form data sources. if a field has a data source, it adds a 'clear data source' button
+//currently this doesn't visually update when data sources are changed, as the state of the data sources isn't being tracked correctly.
 export default function Node_Component(
   node_data: Node,
   set_node: Dispatch<SetStateAction<string>>,

@@ -22,6 +22,14 @@ import {
 import { Button } from "@/components/ui/button";
 import DataSourceSelector from "../components/DataSourceSelector";
 
+//tests:
+//what if we get nothing back? what if what we get back is bad?
+//what if a node is pointing to a data source that doesn't exist?
+//if we get an empty graph, a graph with no edges, a graph with edges to everything
+//
+
+
+
 export default function Home() {
   const [data, setData] = useState<any>(null);
   const [selected_node, setSelectedNode] = useState<string>("");
@@ -41,8 +49,6 @@ export default function Home() {
   if (!data) return <div>Loading..?</div>;
   SetBlueprintData(data);
   const node_array = GetNodes();
-  //call blueprint graph state => pass the data in
-  //then it parses the json and we're all good!! ship it!!
 
   return (
     <Dialog>

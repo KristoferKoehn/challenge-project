@@ -36,6 +36,9 @@ export type Form = {
   updated_at: string;
 };
 
+//we can use this later for making an actual cool graph thing
+//on the page, we can push the cards downward and move them around/open their accordions when
+//the cool graph thing gets clicked maybe
 type NodePosition = {
   x: number;
   y: number;
@@ -51,13 +54,15 @@ type NodeData = {
 
 export type Node = {
   id: string;
-  type: string; //component type is assumed 'Form' in this case
+  type: string;
   position: NodePosition;
   data: NodeData;
 };
 
 let nodes: { [key: string]: Node } = {};
 let forms: { [key: string]: Form } = {};
+
+//this dictionary needs to be tracked in a useState hook, changes to this don't trigger a re-render. 
 let set_data_sources: {
   [node_id: string]: {
     [property_name: string]: [string, string];
@@ -102,11 +107,6 @@ export const GetDataSource = (node_id: string, property_name: string) => {
   return set_data_sources[node_id]?.[property_name];
 };
 
-export const GetDataSources = () => {
-  return set_data_sources;
-};
-
-  
 //this combs through the data from the server and constructs the 'global' data source items
 export const SetBlueprintData = (data: any) => {
   const forms_list = data?.forms ?? [];
