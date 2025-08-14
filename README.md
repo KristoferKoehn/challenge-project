@@ -1,4 +1,4 @@
-Pull down mock server at [https://github.com/mosaic-avantos/frontendchallengeserver](https://github.com/mosaic-avantos/frontendchallengeserver)
+First, pull down and run mock server from [https://github.com/mosaic-avantos/frontendchallengeserver](https://github.com/mosaic-avantos/frontendchallengeserver)
 
 then, run the development server:
 
