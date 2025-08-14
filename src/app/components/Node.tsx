@@ -36,26 +36,12 @@ export default function Node_Component(
     set_property(key);
   };
 
-  const set_data_source_on_click = (
-    target_node_id: string,
-    target_property: string,
-  ) => {};
-
   const clear_data_source_on_click = (
     node_id: string,
     property_name: string,
   ) => {
     ClearDataSourceEntry(node_id, property_name);
   };
-
-  /*
-  const [data_sources, SetDataSources] = useState<
-    {
-      [node_id: string]: {
-        [property_name: string]: [string, string];
-      };
-    }
-  >()*/
 
   return (
     <div>
@@ -80,10 +66,13 @@ export default function Node_Component(
                       variant="ghost"
                       onClick={() => set_selected_property_on_click(key)}
                     >
-                      {key}: {GetNode(GetDataSource(node_data.id, key)?.[0])?.data.name}.{GetDataSource(node_data.id, key)?.[1]}
+                      {key}:{" "}
+                      {
+                        GetNode(GetDataSource(node_data.id, key)?.[0])?.data
+                          .name
+                      }
+                      .{GetDataSource(node_data.id, key)?.[1]}
                     </Button>
-                    {/* put 2nd x button on the right hand side if there is a data source already set 
-                     change button type based on state? like give dotted outline if no data source */}
                   </DialogTrigger>
                   {GetDataSource(node_data.id, key) ? (
                     <Button

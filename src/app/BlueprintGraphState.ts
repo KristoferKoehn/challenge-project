@@ -85,7 +85,7 @@ export const SetDataSource = (
   if (!data_sources[node_id]) data_sources[node_id] = {};
   data_sources[node_id][property_name] = [target_node_id, target_property_name];
 
-  return data_sources
+  return data_sources;
 };
 
 export const ClearDataSourceEntry = (
@@ -102,18 +102,69 @@ export const GetDataSource = (node_id: string, property_name: string) => {
 };
 
 export const GetDataSources = () => {
-  return data_sources
-}
+  return data_sources;
+};
 
 export const SetBlueprintData = (data: any) => {
   const forms_list = data?.forms ?? [];
   const nodes_list = data?.nodes ?? [];
+
+  //these should be sourced from elsewhere
+  const globalNode: Node = {
+    id: "GLOBAL",
+    type: "Form",
+    position: { x: 0, y: 0 },
+    data: {
+      id: "GLOBAL",
+      component_key: "Form",
+      component_id: "FORMGLOBAL",
+      name: "Global",
+      prerequisites: [],
+    },
+  };
+
+  const globalForm: Form = {
+    $schema: "",
+    created_at: new Date().toISOString(),
+    created_by: "system",
+    custom_javascript: "",
+    custom_javascript_functions: "",
+    custom_javascript_triggering_fields: null,
+    description: "Global form with email and id fields",
+    dynamic_field_config: {},
+    field_schema: {
+      additional_properties: {},
+      properties: {
+        email: { type: "string", format: "email" },
+        id: { type: "string" },
+      },
+      required: [],
+      type: "object",
+    },
+    id: "FORMGLOBAL",
+    is_reusable: true,
+    name: "FORMGlobal",
+    ui_schema: {
+      elements: null,
+      type: "VerticalLayout",
+    },
+    updated_at: new Date().toISOString(),
+  };
 
   forms_list.forEach((form: Form) => {
     forms[form.id] = form;
   });
 
   nodes_list.forEach((node: Node) => {
+    if (!node.data.prerequisites.includes("GLOBAL")) {
+      node.data.prerequisites.push("GLOBAL");
+    }
+  });
+
+  nodes_list.forEach((node: Node) => {
     nodes[node.id] = node;
   });
+
+  forms[globalForm.id] = globalForm;
+  nodes[globalNode.id] = globalNode;
 };
