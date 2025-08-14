@@ -1,26 +1,36 @@
-import { Form } from "./Form"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {Form, GetForm, Node} from "@/app/BlueprintGraphState"
 
-//we're just going to pull in the bare minimum for this stuff
-type NodePosition = {
-    x:number
-    y:number
+export default function Node_Component(node_data : Node) {
+
+    let form : Form = GetForm(node_data.data.component_id)
+    
+
+
+    return (
+    <div>
+        <Card>
+            <CardHeader>
+                <CardTitle>
+                    {node_data.data.name}
+                </CardTitle>
+                <CardDescription>
+                    {node_data.id}
+                </CardDescription>
+            </CardHeader>
+            {/* <CardContent>
+                {Object.entries(form?.field_schema?.properties).map(([key, value]: any, i:number) => (
+                  <div key={i}>
+                    {key}:{JSON.stringify(value)}
+                  </div>
+                ))}
+                {Object.entries(node_data.data.prerequisites).map(([key, value]: any, i:number) => (
+                  <div key={i}>
+                    {key}:{JSON.stringify(value)}
+                  </div>
+                ))}
+            </CardContent> */}
+        </Card>
+    </div>
+  );
 }
-
-type NodeData = {
-    id: string
-    component_key: string
-    component_id: string
-    name: string
-    prerequisites: string[]
-}
-
-type Node = {
-    id: string
-    type: string //component type is assumed 'Form' in this case
-    position: NodePosition
-    data: NodeData
-}
-
-export default function Node_Component(node: Node, form: Form) {
-
-} 

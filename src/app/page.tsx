@@ -1,7 +1,9 @@
 "use client"
-import Image from "next/image";
+import { Form, GetNodes, SetBlueprintData } from "./BlueprintGraphState";
 import { useEffect, useState } from "react";
-import Form_Component, { Form } from "./components/Form";
+import Node_Component from "./components/Node";
+import {Node} from "@/app/BlueprintGraphState"
+
 
 
 export default function Home() {
@@ -20,20 +22,22 @@ export default function Home() {
   }, [])
 
   
-   // extracting form array from json
   if (!data) return <div>Loading..?</div>
-  const form_array = data.forms ?? [];
-
+  SetBlueprintData(data)
+  const node_array = GetNodes()
+  //call blueprint graph state => pass the data in
+  //then it parses the json and we're all good!! ship it!!
 
   return (
-        <div>
-      {form_array?.map((form: Form, i:number) => {
+    <div>
+      {node_array?.map((node: Node, i:number) => {
         return (
-          <div key={i} className="py-10">
-            {Form_Component(form)}
+          <div key={i} className="py-2">
+            {Node_Component(node)}
           </div>
         )
       })}
     </div>
   );
 }
+
